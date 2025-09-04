@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\SubscriptionResource;
 use App\Models\Subscription;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,8 @@ class SubscriptionController extends Controller
      */
     public function index()
     {
-        //
+        $subscriptions = Subscription::all();
+        return response()->json($subscriptions);
     }
 
     /**
@@ -31,7 +33,7 @@ class SubscriptionController extends Controller
         $validated = $request->validate(
             [
                 'user_id' => 'required|exists:users,id',
-                'plan_id' => 'requiref|exists:plans,id',
+                'plan_id' => 'required|exists:plans,id',
                 'status' => 'required|boolean',
                 'start_date' => 'required|date',
                 'end_date' => 'required|date|after_or_equal:start_date',
@@ -67,7 +69,15 @@ class SubscriptionController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $subscription = Subscription::find($id);
+
+        if(!$subscription){
+            return response()->json([
+                'message' => 'Suscripción no encontrada'
+            ], 404);
+        }
+
+        return new SubscriptionResource($subscription);
     }
 
     /**
@@ -83,7 +93,30 @@ class SubscriptionController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $subscription = Subscription::find($id);
+
+        if (!$subscription) {
+            return response()->json([
+                'message' => 'Suscripción no encontrada'
+            ], 404);
+        }
+
+        $validated = $request->validate(
+            [
+                'user_id' => 'sometimes|required|exists:users,id',
+                'plan_id' => 'sometimes|required|exists:plans,id',
+                'status' => 'sometimes|required|boolean',
+                'start_date' => 'sometimes|required|date',
+                'end_date' => 'sometimes|required|date|after_or_equal:start_date',
+            ]
+        );
+
+        $subscription->update($validated);
+
+        return response()->json([
+            'message' => 'Suscripción actualizada exitosamente',
+            'subscription' => $subscription,
+        ]);
     }
 
     /**
@@ -91,6 +124,18 @@ class SubscriptionController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $subscription = Subscription::find($id);
+
+        if (!$subscription) {
+            return response()->json([
+                'message' => 'Suscripción no encontrada'
+            ], 404);
+        }
+
+        $subscription->delete();
+
+        return response()->json([
+            'message' => 'Suscripción eliminada exitosamente'
+        ]);
     }
 }

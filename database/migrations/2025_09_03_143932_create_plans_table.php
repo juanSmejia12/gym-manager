@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('description');
-            $table->decimal('price', 8, 2); // Precio del plan
+            $table->decimal('price', 9, 2); // Precio del plan
             $table->timestamps();
         });
     }

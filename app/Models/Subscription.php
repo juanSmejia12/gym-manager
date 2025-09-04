@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\User;
+use App\Models\Plan;
 use Illuminate\Database\Eloquent\Model;
 
 class Subscription extends Model
@@ -29,10 +31,10 @@ class Subscription extends Model
     {
         return $this->belongsTo(User::class);
     }
-/* 
+
     function plan()
     {
         return $this->belongsTo(Plan::class);
-    } */
+    } 
 
 }

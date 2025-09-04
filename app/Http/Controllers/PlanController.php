@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\PlansResource;
-use App\Models\Plans;
+use App\Http\Resources\PlanResource;
+use App\Models\Plan;
 use Illuminate\Http\Request;
 
-class PlansController extends Controller
+class PlanController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $plans = Plans::all();
-        return PlansResource::collection($plans);
+        $plans = Plan::all();
+        return PlanResource::collection($plans);
     }
 
     /**
@@ -34,7 +34,7 @@ class PlansController extends Controller
             'price.min' => 'El precio no puede ser negativo.',
         ]);
 
-        $plan = Plans::create($validated);
+        $plan = Plan::create($validated);
 
         return response()->json([
             'plan' => $plan,
@@ -47,13 +47,13 @@ class PlansController extends Controller
      */
     public function show(string $id)
     {
-        $plan = Plans::where('id', $id)->first();
+        $plan = Plan::where('id', $id)->first();
 
         if(!$plan) {
             return response()->json(['message' => 'Plan no encontrado'], 404);
         }
         
-        return new PlansResource($plan);
+        return new PlanResource($plan);
     }
 
     /**
@@ -61,7 +61,7 @@ class PlansController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $plan = Plans::where('id', $id)->first();
+        $plan = Plan::where('id', $id)->first();
 
         if (!$plan) {
             return response()->json(['message' => 'Plan no encontrado'], 404);
@@ -93,7 +93,7 @@ class PlansController extends Controller
      */
     public function destroy(string $id)
     {
-        $plan = Plans::where('id', $id)->first();
+        $plan = Plan::where('id', $id)->first();
 
         if (!$plan) {
             return response()->json(['message' => 'Plan no encontrado'], 404);

@@ -4,7 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\EquipmentController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\PlansController;
+use App\Http\Controllers\PlanController;
+use App\Http\Controllers\SubscriptionController;
 
 Route::post('/employees', [EmployeeController::class, 'store']);
 Route::get('/employees', [EmployeeController::class, 'index']);
@@ -27,8 +28,15 @@ Route::delete('/users/document/{document}', [UserController::class, 'destroy']);
 Route::put('/users/document/{document}', [UserController::class, 'update']);
 
 //to plans
-Route::get('/plans', [PlansController::class, 'index']);
-Route::post('/plans', [PlansController::class, 'store']);
-Route::get('/plans/id/{id}', [PlansController::class, 'show']);
-Route::delete('/plans/id/{id}', [PlansController::class, 'destroy']);
-Route::put('/plans/id/{id}', [PlansController::class, 'update']);
+Route::get('/plans', [PlanController::class, 'index']);
+Route::post('/plans', [PlanController::class, 'store']);
+Route::get('/plans/id/{id}', [PlanController::class, 'show']);
+Route::delete('/plans/id/{id}', [PlanController::class, 'destroy']);
+Route::put('/plans/id/{id}', [PlanController::class, 'update']);
+
+//to subscriptions
+Route::get('/subscriptions', [SubscriptionController::class, 'index']);
+Route::post('/subscriptions', [SubscriptionController::class, 'store']);
+Route::get('/subscriptions/id/{id}', [SubscriptionController::class, 'show']);
+Route::delete('/subscriptions/id/{id}', [SubscriptionController::class, 'destroy']);
+Route::put('/subscriptions/id/{id}', [SubscriptionController::class, 'update']);
