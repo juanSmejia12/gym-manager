@@ -11,9 +11,9 @@ class PlansResource extends JsonResource
     {
         return [
             'id'    => $this->id,
-            'document' => $this->document,
             'name'  => $this->name,
-            'email' => $this->email,
+            'description' => $this->description,
+            'price' => $this->price,
             'created_at' => $this->created_at->format('Y-m-d H:i:s'),
         ];
     }

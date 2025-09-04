@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('name');
             $table->text('description');
             $table->decimal('price', 8, 2); // Precio del plan
-            $table->integer('duration_days'); // Duración en días
             $table->timestamps();
         });
     }
