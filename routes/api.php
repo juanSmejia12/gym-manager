@@ -12,3 +12,7 @@ Route::put('/employees/document/{document}', [EmployeeController::class, 'update
 
 //to equipments
 Route::post('/equipments', [EquipmentController::class, 'store']);
+Route::get('/equipments', [EquipmentController::class, 'index']);
+Route::delete('/equipments/id/{id}', [EquipmentController::class, 'destroy']);
+Route::get('/equipments/id/{id}', [EquipmentController::class, 'show']);
+Route::put('/equipments/id/{id}', [EquipmentController::class, 'update']);
