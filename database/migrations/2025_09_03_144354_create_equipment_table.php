@@ -14,8 +14,11 @@ return new class extends Migration
         Schema::create('equipment', function (Blueprint $table) {
             $table->id();
             $table->string('name'); // Nombre del equipo
-            $table->text('description'); // Descripción del equipo
-            $table->string('condition'); // Estado del equipo: Nuevo, Usado, En Reparación
+            $table->text('description')->nullable(); // Descripción opcional
+            $table->unsignedInteger('quantity')->default(1); // Cantidad disponible
+            $table->decimal('weight', 5, 2)->nullable(); // Peso (Kg), opcional
+            $table->boolean('condition')->default(true); // Estado: disponible (true) o no disponible (false)
+            $table->foreignId('type_id')->constrained()->onDelete('cascade'); // Tipo de equipo (mancuernas, maquinas, etc.)
             $table->timestamps();
         });
     }
