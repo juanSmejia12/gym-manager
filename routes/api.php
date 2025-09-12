@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\PlanController;
 use App\Http\Controllers\SubscriptionController;
 
+//to employees
 Route::post('/employees', [EmployeeController::class, 'store']);
 Route::get('/employees', [EmployeeController::class, 'index']);
 Route::delete('/employees/document/{document}', [EmployeeController::class, 'destroy']);

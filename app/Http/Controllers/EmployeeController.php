@@ -113,14 +113,16 @@ class EmployeeController extends Controller
 
         if (!$employee) {
             return response()->json([
-                'message' => 'Empleado no encontrado'
+                'message' => 'Empleado no encontrado',
             ], 404);
         }
 
         $employee->delete();
 
         return response()->json([
-            'message' => 'Empleado eliminado exitosamente'
+            'message' => 'Empleado eliminado exitosamente',
+            'success' => true,
+            
         ], 200);
     }
 }
